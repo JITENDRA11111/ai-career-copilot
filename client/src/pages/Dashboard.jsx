@@ -7,7 +7,7 @@ import ProgressCharts from "../components/ProgressCharts";
 import ActivityFeed from "../components/ActivityFeed";
 import LoadingAnimation from "../components/LoadingAnimation";
 
-const STATS_API = "http://localhost:5000/api/v1/user/dashboard-stats";
+const STATS_API = `${import.meta.env.VITE_API_URL}/user/dashboard-stats`;
 
 export default function Dashboard() {
   const [data, setData] = useState(null);

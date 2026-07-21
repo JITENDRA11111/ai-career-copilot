@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Lock, Mail, User, ArrowRight, ShieldCheck } from "lucide-react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/v1/auth";
+const API_URL = `${import.meta.env.VITE_API_URL}/auth`;
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);

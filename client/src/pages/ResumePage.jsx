@@ -5,9 +5,9 @@ import { FileText, Upload, Trash2, Cpu, Award, ArrowRight, CheckCircle, AlertCir
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useNavigationStore } from "../store/navigationStore";
 
-const UPLOAD_API = "http://localhost:5000/api/v1/resume/upload";
-const LIST_API = "http://localhost:5000/api/v1/resume/list";
-const DELETE_API = "http://localhost:5000/api/v1/resume";
+const UPLOAD_API = `${import.meta.env.VITE_API_URL}/resume/upload`;
+const LIST_API = `${import.meta.env.VITE_API_URL}/resume/list`;
+const DELETE_API = `${import.meta.env.VITE_API_URL}/resume`;
 
 export default function ResumePage() {
   const { setIsTaskActive } = useNavigationStore();

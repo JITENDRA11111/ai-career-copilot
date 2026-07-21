@@ -4,10 +4,10 @@ import { Briefcase, AlertCircle, ArrowLeft, ExternalLink, Bookmark, MapPin, Doll
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useNavigationStore } from "../store/navigationStore";
 
-const RECOMMEND_API = "http://localhost:5000/api/v1/jobs/recommend";
-const SAVE_API = "http://localhost:5000/api/v1/jobs/save";
-const GET_SAVED_API = "http://localhost:5000/api/v1/jobs/saved";
-const LIST_RESUMES_API = "http://localhost:5000/api/v1/resume/list";
+const RECOMMEND_API = `${import.meta.env.VITE_API_URL}/jobs/recommend`;
+const SAVE_API = `${import.meta.env.VITE_API_URL}/jobs/save`;
+const GET_SAVED_API = `${import.meta.env.VITE_API_URL}/jobs/saved`;
+const LIST_RESUMES_API = `${import.meta.env.VITE_API_URL}/resume/list`;
 
 export default function JobSearchPage() {
   const { setIsTaskActive } = useNavigationStore();

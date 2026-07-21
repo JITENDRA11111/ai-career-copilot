@@ -6,9 +6,9 @@ import Editor from "@monaco-editor/react";
 import { useNavigationStore } from "../store/navigationStore";
 import { useThemeStore } from "../store/themeStore";
 
-const GENERATE_API = "http://localhost:5000/api/v1/coding/generate";
-const GENERATE_OA_API = "http://localhost:5000/api/v1/coding/generate-oa";
-const SUBMIT_API = "http://localhost:5000/api/v1/coding/submit";
+const GENERATE_API = `${import.meta.env.VITE_API_URL}/coding/generate`;
+const GENERATE_OA_API = `${import.meta.env.VITE_API_URL}/coding/generate-oa`;
+const SUBMIT_API = `${import.meta.env.VITE_API_URL}/coding/submit`;
 
 export default function CodingPage() {
   const { setIsTaskActive } = useNavigationStore();

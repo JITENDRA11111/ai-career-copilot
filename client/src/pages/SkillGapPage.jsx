@@ -3,8 +3,8 @@ import axios from "axios";
 import { Target, Star, BookOpen, AlertCircle, ArrowLeft, Award } from "lucide-react";
 import { useNavigationStore } from "../store/navigationStore";
 
-const GAP_API = "http://localhost:5000/api/v1/skills/gap";
-const LIST_RESUMES_API = "http://localhost:5000/api/v1/resume/list";
+const GAP_API = `${import.meta.env.VITE_API_URL}/skills/gap`;
+const LIST_RESUMES_API = `${import.meta.env.VITE_API_URL}/resume/list`;
 
 export default function SkillGapPage() {
   const { setIsTaskActive } = useNavigationStore();

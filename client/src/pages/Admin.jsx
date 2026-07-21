@@ -6,9 +6,9 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGri
 import UsersTable from "../components/UsersTable";
 import LoadingAnimation from "../components/LoadingAnimation";
 
-const STATS_API = "http://localhost:5000/api/v1/admin/stats";
-const LOGS_API = "http://localhost:5000/api/v1/admin/logs";
-const USERS_API = "http://localhost:5000/api/v1/admin/users";
+const STATS_API = `${import.meta.env.VITE_API_URL}/admin/stats`;
+const LOGS_API = `${import.meta.env.VITE_API_URL}/admin/logs`;
+const USERS_API = `${import.meta.env.VITE_API_URL}/admin/users`;
 
 export default function Admin() {
   const [statsData, setStatsData] = useState(null);

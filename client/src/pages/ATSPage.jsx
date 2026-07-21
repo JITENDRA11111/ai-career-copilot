@@ -4,8 +4,8 @@ import { Award, AlertCircle, ArrowLeft, Target, CheckCircle2, XCircle, FileText 
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useNavigationStore } from "../store/navigationStore";
 
-const SCORE_API = "http://localhost:5000/api/v1/ats/score";
-const LIST_RESUMES_API = "http://localhost:5000/api/v1/resume/list";
+const SCORE_API = `${import.meta.env.VITE_API_URL}/ats/score`;
+const LIST_RESUMES_API = `${import.meta.env.VITE_API_URL}/resume/list`;
 
 export default function ATSPage() {
   const { setIsTaskActive } = useNavigationStore();

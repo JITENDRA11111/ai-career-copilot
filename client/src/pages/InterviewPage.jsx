@@ -5,8 +5,8 @@ import { UserCheck, ShieldAlert, Award, FileText, Send, Star, AlertCircle, Arrow
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useNavigationStore } from "../store/navigationStore";
 
-const START_API = "http://localhost:5000/api/v1/interview/start";
-const LIST_RESUMES_API = "http://localhost:5000/api/v1/resume/list";
+const START_API = `${import.meta.env.VITE_API_URL}/interview/start`;
+const LIST_RESUMES_API = `${import.meta.env.VITE_API_URL}/resume/list`;
 
 export default function InterviewPage() {
   const { setIsTaskActive } = useNavigationStore();
@@ -100,7 +100,7 @@ export default function InterviewPage() {
         window.history.pushState({ session: true }, "");
 
         // Initialize Sockets practice namespace
-        const ioSocket = io("http://localhost:5000/interview", {
+        const ioSocket = io(`${import.meta.env.VITE_API_URL.replace("/api/v1", "")}/interview`, {
           auth: { token },
         });
 

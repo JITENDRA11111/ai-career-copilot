@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import LoadingAnimation from "../components/LoadingAnimation";
 
-const EXCHANGE_API = "http://localhost:5000/api/v1/auth/exchange-code";
+const EXCHANGE_API = `${import.meta.env.VITE_API_URL}/auth/exchange-code`;
 
 export default function OAuthSuccess() {
   const [searchParams] = useSearchParams();
