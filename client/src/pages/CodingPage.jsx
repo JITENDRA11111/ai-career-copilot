@@ -501,6 +501,47 @@ export default function CodingPage() {
                       </span>
                     </div>
                   </div>
+                  
+                  {/* First Failed Test Case Display */}
+                  {result.passed < result.total && result.results && result.results.find(r => !r.passed) && (
+                    <div className="bg-slate-950/40 p-4 rounded-lg border border-red-900/30 space-y-3 mt-4 animate-fade-in">
+                      <div className="flex items-center gap-2 border-b border-red-900/20 pb-2">
+                        <XCircle size={14} className="text-red-400" />
+                        <h5 className="text-[11px] font-bold text-red-400 uppercase tracking-wider">First Failing Test Case</h5>
+                      </div>
+                      
+                      {(() => {
+                        const firstFailed = result.results.find(r => !r.passed);
+                        if (!firstFailed || !firstFailed.testCase) return <p className="text-xs text-slate-400">Hidden test case failed.</p>;
+                        
+                        return (
+                          <div className="space-y-3 font-mono text-xs">
+                            <div>
+                              <span className="text-slate-500 block text-[10px] uppercase mb-1">Input:</span>
+                              <div className="bg-[#020617] p-2 rounded border border-slate-800 text-slate-300 break-all">
+                                {JSON.stringify(firstFailed.testCase.input)}
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <span className="text-slate-500 block text-[10px] uppercase mb-1">Expected Output:</span>
+                                <div className="bg-[#020617] p-2 rounded border border-emerald-900/30 text-emerald-400 break-all">
+                                  {JSON.stringify(firstFailed.testCase.expectedOutput)}
+                                </div>
+                              </div>
+                              <div>
+                                <span className="text-slate-500 block text-[10px] uppercase mb-1">Your Output:</span>
+                                <div className="bg-[#020617] p-2 rounded border border-red-900/30 text-red-400 break-all">
+                                  {firstFailed.error ? firstFailed.error : (firstFailed.output !== undefined ? JSON.stringify(firstFailed.output) : "No output")}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
 
                   {result.results?.some((r) => r.stderr) && (
                     <div className="p-4 bg-red-950/40 rounded-lg border border-red-900/50 space-y-2 mt-4">
