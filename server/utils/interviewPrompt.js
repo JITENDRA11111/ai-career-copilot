@@ -139,22 +139,22 @@ You are a senior interviewer.
 Evaluate the candidate's follow-up answer in the context of the original question and original answer.
 
 Job Role:
-\${jobTitle}
+${jobTitle}
 
 Interview Type:
-\${interviewType}
+${interviewType}
 
 Original Question:
-\${question}
+${question}
 
 Original Candidate Answer:
-\${answer}
+${answer}
 
 Your Follow-Up Question:
-\${followUpQuestion}
+${followUpQuestion}
 
 Candidate's Follow-Up Answer:
-\${followUpAnswer}
+${followUpAnswer}
 
 Evaluate how the candidate addressed the follow-up. Combine this assessment with the original answer to determine a final, adjusted score and consolidated feedback for this question.
 
