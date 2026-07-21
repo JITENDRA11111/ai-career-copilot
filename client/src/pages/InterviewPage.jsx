@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { UserCheck, ShieldAlert, Award, FileText, Send, Star, AlertCircle, ArrowLeft } from "lucide-react";
+import { UserCheck, ShieldAlert, Award, FileText, Send, Star, AlertCircle, ArrowLeft, Mic, MicOff } from "lucide-react";
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useNavigationStore } from "../store/navigationStore";
 
@@ -29,6 +29,10 @@ export default function InterviewPage() {
   const [currentFeedback, setCurrentFeedback] = useState(null);
   const [sessionCompleteReport, setSessionCompleteReport] = useState(null);
   const [error, setError] = useState("");
+  
+  // Mic state
+  const [isRecording, setIsRecording] = useState(false);
+  const recognitionRef = useRef(null);
 
   const token = localStorage.getItem("token");
 
@@ -68,8 +72,10 @@ export default function InterviewPage() {
     const handlePopState = (e) => {
       if (session || sessionCompleteReport) {
         if (socket) socket.disconnect();
+        if (recognitionRef.current) recognitionRef.current.stop();
         setSession(null);
         setSessionCompleteReport(null);
+        setIsRecording(false);
       }
     };
     window.addEventListener("popstate", handlePopState);
@@ -140,6 +146,55 @@ export default function InterviewPage() {
       setError(err.response?.data?.message || "Failed to initialize interview session.");
       setLoading(false);
     }
+  };
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      setIsRecording(false);
+      return;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setError("Your browser does not support Voice-to-Text. Please use Google Chrome.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event) => {
+      let currentTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          setAnswer((prev) => prev + (prev.endsWith(" ") ? "" : " ") + transcript);
+        } else {
+          currentTranscript += transcript;
+        }
+      }
+      // Note: we're only appending final results to the main answer box for simplicity
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      setIsRecording(false);
+      setError("Microphone error: " + event.error);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognition.start();
+    recognitionRef.current = recognition;
+    setIsRecording(true);
+    setError("");
   };
 
   const submitAnswer = (e) => {
@@ -333,13 +388,27 @@ export default function InterviewPage() {
               <form onSubmit={submitAnswer} className="space-y-4">
                 <div>
                   <label className="text-xs font-semibold text-slate-400 mb-1 block">Your Answer</label>
-                  <textarea
-                    required
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    placeholder="Type your detailed response here..."
-                    className="w-full h-36 bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded-lg p-3 text-xs text-slate-100 outline-none resize-none"
-                  />
+                  <div className="relative">
+                    <textarea
+                      required
+                      value={answer}
+                      onChange={(e) => setAnswer(e.target.value)}
+                      placeholder="Type your detailed response here..."
+                      className={`w-full h-36 bg-slate-950 border ${isRecording ? 'border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'border-slate-800'} focus:border-indigo-500 rounded-lg p-3 pr-12 text-xs text-slate-100 outline-none resize-none transition-all duration-300`}
+                    />
+                    <button
+                      type="button"
+                      onClick={toggleRecording}
+                      className={`absolute right-3 bottom-3 p-2 rounded-full transition-all duration-300 ${
+                        isRecording 
+                          ? "bg-emerald-500/20 text-emerald-400 animate-pulse border border-emerald-500/50" 
+                          : "bg-slate-800/50 text-slate-400 hover:text-slate-200 hover:bg-slate-700"
+                      }`}
+                      title={isRecording ? "Stop Recording" : "Start Recording"}
+                    >
+                      {isRecording ? <Mic size={16} /> : <MicOff size={16} />}
+                    </button>
+                  </div>
                 </div>
 
                 <div className="flex justify-between items-center">
