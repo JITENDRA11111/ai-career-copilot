@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-950: var(--slate-950);
+  --color-slate-900: var(--slate-900);
+  --color-slate-800: var(--slate-800);
+  --color-slate-700: var(--slate-700);
+  --color-slate-600: var(--slate-600);
+  --color-slate-500: var(--slate-500);
+  --color-slate-400: var(--slate-400);
+  --color-slate-300: var(--slate-300);
+  --color-slate-200: var(--slate-200);
+  --color-slate-100: var(--slate-100);
+  --color-slate-50:  var(--slate-50);
+
+  --color-indigo-950: var(--indigo-950);
+  --color-indigo-900: var(--indigo-900);
+  --color-indigo-800: var(--indigo-800);
+  --color-indigo-700: var(--indigo-700);
+  --color-indigo-600: var(--indigo-600);
+  --color-indigo-500: var(--indigo-500);
+  --color-indigo-400: var(--indigo-400);
+  --color-indigo-300: var(--indigo-300);
+  --color-indigo-200: var(--indigo-200);
+  --color-indigo-100: var(--indigo-100);
+  --color-indigo-50:  var(--indigo-50);
+}
+
+:root, [data-theme="original"] {
+  /* Original Slate */
+  --slate-950: #020617;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+  /* Original Indigo */
+  --indigo-950: #1e1b4b;
+  --indigo-900: #312e81;
+  --indigo-800: #3730a3;
+  --indigo-700: #4338ca;
+  --indigo-600: #4f46e5;
+  --indigo-500: #6366f1;
+  --indigo-400: #818cf8;
+  --indigo-300: #a5b4fc;
+  --indigo-200: #c7d2fe;
+  --indigo-100: #e0e7ff;
+  --indigo-50:  #eef2ff;
+}
+
+[data-theme="hacker"] {
+  /* Hacker Dark Grays */
+  --slate-950: #1a1a1a;
+  --slate-900: #282828;
+  --slate-800: #333333;
+  --slate-700: #3e3e3e;
+  --slate-600: #595959;
+  --slate-500: #8a8a8a;
+  --slate-400: #9e9e9e;
+  --slate-300: #bfbfbf;
+  --slate-200: #eff1f6;
+  --slate-100: #ffffff;
+  --slate-50:  #ffffff;
+  /* Hacker Orange */
+  --indigo-950: #4d2b00;
+  --indigo-900: #663b00;
+  --indigo-800: #804a00;
+  --indigo-700: #b36700;
+  --indigo-600: #ffa116;
+  --indigo-500: #ffb340;
+  --indigo-400: #ffc466;
+  --indigo-300: #ffd68c;
+  --indigo-200: #ffe8b3;
+  --indigo-100: #fff4d9;
+  --indigo-50:  #fffbf0;
+}
+
+[data-theme="light"] {
+  /* Light Mode (Inverted Slate) */
+  --slate-950: #f8fafc;
+  --slate-900: #ffffff;
+  --slate-800: #e2e8f0;
+  --slate-700: #cbd5e1;
+  --slate-600: #94a3b8;
+  --slate-500: #64748b;
+  --slate-400: #475569;
+  --slate-300: #334155;
+  --slate-200: #1e293b;
+  --slate-100: #0f172a;
+  --slate-50:  #020617;
+  /* Keep standard Indigo for light mode */
+  --indigo-950: #eef2ff;
+  --indigo-900: #e0e7ff;
+  --indigo-800: #c7d2fe;
+  --indigo-700: #a5b4fc;
+  --indigo-600: #4f46e5;
+  --indigo-500: #6366f1;
+  --indigo-400: #818cf8;
+  --indigo-300: #4338ca;
+  --indigo-200: #3730a3;
+  --indigo-100: #312e81;
+  --indigo-50:  #1e1b4b;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+.card{
+    @apply bg-white rounded-xl shadow p-6;
+}
+
+.btn-primary{
+    @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition;
+}
+
+.btn-secondary{
+    @apply bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg;
+}
+
+.page-title{
+    @apply text-3xl font-bold;
+}
+
+.section-title{
+    @apply text-xl font-semibold mb-4;
+}
+
+}
