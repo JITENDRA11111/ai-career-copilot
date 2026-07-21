@@ -36,6 +36,8 @@ Return ONLY valid JSON.
 {
   "title":"",
   "description":"",
+  
+  "logicTrace": "CRITICAL: Write a step-by-step mathematical trace of how you calculated the expectedOutput for ALL 5 test cases. Do this BEFORE generating the testCases array to ensure zero mistakes.",
 
   "examples":[
     {
@@ -104,9 +106,9 @@ Rules:
 10. The starter code MUST ONLY contain the function declaration with a placeholder comment (e.g. "// Your code here"). DO NOT include any default return statement. Do NOT write any solution or logic. CRITICAL: The starter code MUST be formatted across multiple lines with proper 4-space indentation. You MUST use '\\n' literal characters inside the JSON string to create these newlines. DO NOT compress it into a single line string.
 FOR C++, JAVASCRIPT, AND PYTHON: DO NOT wrap the function inside any class.
 
-10b. CRITICAL: The expectedOutput for all test cases MUST be 100% mathematically and logically correct. You MUST mentally trace the algorithm to verify every test case. Do not guess the output.
+10b. CRITICAL: The expectedOutput for all test cases MUST be 100% mathematically and logically correct. You MUST mentally trace the algorithm in the 'logicTrace' field to verify every test case. Do not guess the output. Keep test case sizes small (e.g. arrays < 10 elements) to avoid calculation errors.
 
-11. Hints should NOT reveal the solution.
+10c. CRITICAL: The 'expectedOutput' data type MUST EXACTLY MATCH the 'returnType' you defined in the functionSignature. If returnType is 'vector<int>', expectedOutput MUST be an array of integers. If returnType is 'int', expectedOutput MUST be a single integer.
 
 12. Generate exactly THREE hints.
 
