@@ -544,9 +544,11 @@ export default function CodingPage() {
                   )}
 
                   {result.results?.some((r) => r.stderr) && (
-                    <div className="p-4 bg-red-950/40 rounded-lg border border-red-900/50 space-y-2 mt-4">
-                      <span className="font-bold text-red-400 block mb-1 text-xs uppercase">Error Output:</span>
-                      <pre className="text-[10px] text-red-300 whitespace-pre-wrap font-mono overflow-auto max-h-40">
+                    <div className={`p-4 rounded-lg border space-y-2 mt-4 ${result.passed === result.total ? "bg-amber-950/40 border-amber-900/50" : "bg-red-950/40 border-red-900/50"}`}>
+                      <span className={`font-bold block mb-1 text-xs uppercase ${result.passed === result.total ? "text-amber-400" : "text-red-400"}`}>
+                        {result.passed === result.total ? "Compiler Warnings / Stderr:" : "Error Output:"}
+                      </span>
+                      <pre className={`text-[10px] whitespace-pre-wrap font-mono overflow-auto max-h-40 ${result.passed === result.total ? "text-amber-300" : "text-red-300"}`}>
                         {result.results.find((r) => r.stderr)?.stderr || "Execution failed."}
                       </pre>
                     </div>
